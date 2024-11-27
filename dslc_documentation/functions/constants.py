@@ -1,0 +1,5 @@
+BM_NAME = "SP500"
+STARTDATE = "1Jan15"
+ENDDATE = "30Sep24"
+N_THRESHOLD_BPS = 100
+DATA_DIR = "./../data/"
