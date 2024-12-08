@@ -107,5 +107,5 @@ Explore advanced time-series models like Long Short-Term Memory (LSTM) networks 
 Incorporate alternative data sources like sentiment analysis and macroeconomic indicators.
 Address real-world trading constraints, such as transaction costs and liquidity.
 ## Contributors
-Aashish Khubchandani (Cornell Tech)
-Abhijay Rane (Cornell Tech)
+- Aashish Khubchandani (Cornell Tech)
+- Abhijay Rane (Cornell Tech)
