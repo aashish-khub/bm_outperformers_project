@@ -23,17 +23,25 @@ Repository Structure
 ├── data/
 │   ├── Raw and processed datasets
 │   ├── Example: SP500_eval_predictions_LogisticRegression.csv
-│   ├── Plots: SP500_plot_eval_XGBoost_port_vs_bm.png
+│   ├── Plots:
+│       ├── SP500_plot_eval_XGBoost_port_vs_bm.png
+│       ├── SP500_plot_eval_Stacking_port_vs_bm.png
 │
 ├── dslc_documentation/
-│   ├── Detailed documentation and methodologies for each stage of the project
+│   ├── functions/
+│       ├── 01_cleaning.ipynb: Notebook for data cleaning and preprocessing
+│       ├── 02_eda.ipynb: Exploratory Data Analysis
+│       ├── 03_prediction.ipynb: Main prediction workflow
+│       ├── 03_prediction_SVC.ipynb: Support Vector Classifier model
+│       ├── 03_prediction_logistic_regression.ipynb: Logistic Regression model
+│       ├── 03_prediction_random_forest.ipynb: Random Forest model
+│       ├── 03_prediction_xgboost.ipynb: XGBoost model
+│       ├── 04_trading_strategy.ipynb: Trading strategy simulation
 │
-├── functions/
-│   ├── Python scripts for data cleaning, feature engineering, and modeling
-│   ├── Examples: helper_fns.py, 03_prediction_xgboost.ipynb
-│
-├── .gitignore
-├── README.md
+├── .gitignore: Specifies files and directories ignored by Git
+├── README.md: Main project documentation
+.
+
 ```
 
 ### Highlights
