@@ -19,6 +19,9 @@ Repository Structure
 
 ### Repository Structure:
 ```yaml
+### Repository Structure:
+
+```yaml
 .
 ├── data/
 │   ├── Raw and processed datasets
@@ -29,19 +32,20 @@ Repository Structure
 │
 ├── dslc_documentation/
 │   ├── functions/
-│       ├── 01_cleaning.ipynb: Notebook for data cleaning and preprocessing
-│       ├── 02_eda.ipynb: Exploratory Data Analysis
-│       ├── 03_prediction.ipynb: Main prediction workflow
-│       ├── 03_prediction_SVC.ipynb: Support Vector Classifier model
-│       ├── 03_prediction_logistic_regression.ipynb: Logistic Regression model
-│       ├── 03_prediction_random_forest.ipynb: Random Forest model
-│       ├── 03_prediction_xgboost.ipynb: XGBoost model
-│       ├── 04_trading_strategy.ipynb: Trading strategy simulation
+│       ├── constants.py: Script containing project constants
+│       ├── helper_fns.py: Helper functions for data manipulation and utilities
+│   ├── 01_cleaning.ipynb: Notebook for data cleaning and preprocessing
+│   ├── 02_eda.ipynb: Exploratory Data Analysis
+│   ├── 03_prediction.ipynb: Main prediction workflow
+│   ├── 03_prediction_SVC.ipynb: Support Vector Classifier model
+│   ├── 03_prediction_logistic_regression.ipynb: Logistic Regression model
+│   ├── 03_prediction_random_forest.ipynb: Random Forest model
+│   ├── 03_prediction_xgboost.ipynb: XGBoost model
+│   ├── 04_trading_strategy.ipynb: Trading strategy simulation
 │
 ├── .gitignore: Specifies files and directories ignored by Git
 ├── README.md: Main project documentation
 .
-
 ```
 
 ### Highlights
