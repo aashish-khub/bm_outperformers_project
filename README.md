@@ -19,9 +19,6 @@ Repository Structure
 
 ### Repository Structure:
 ```yaml
-### Repository Structure:
-
-```yaml
 .
 ├── data/
 │   ├── Raw and processed datasets
