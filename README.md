@@ -1,91 +1,96 @@
+# Forecasting Outperformers for S&P 500 Stocks Using Machine Learning
+This repository contains the implementation of a project aimed at forecasting the relative performance of S&P 500 stocks within a one-week horizon using machine learning (ML). By framing this task as a binary classification problem, the project predicts whether a stock’s active return—defined as the difference between its individual return and the benchmark return—exceeds a predefined threshold.
 
+## Project Overview
+This project explores how machine learning models can help identify S&P 500 stocks likely to outperform in the short term. Predictions are tested through a simulated trading strategy to evaluate their real-world applicability. It demonstrates how data-driven approaches can support decision-making in financial markets while identifying opportunities for further refinement.
 
-# Forecasting S&P 500 Stock Outperformance Using Machine Learning
-This repository contains the implementation of a machine learning project that forecasts the relative performance of S&P 500 stocks within a one-week horizon. By framing the problem as a binary classification task, the project predicts whether a stock’s active return (relative to the benchmark) will exceed a predefined threshold of 100 basis points (1%).
+## Key ML models used:
 
-The repository includes all relevant scripts, data, and documentation to replicate the project, making it a valuable resource for those interested in the intersection of machine learning and financial markets.
+- Logistic Regression
+- Random Forest
+- XGBoost
+- K-Nearest Neighbors (KNN)
+- Support Vector Classifier (SVC)
+- Stacking Classifier (combining Logistic Regression, Random Forest, and XGBoost)
+## Problem Formulation
+The task of predicting stock outperformance is framed as a binary classification problem. The goal is to determine whether a given stock will outperform the S&P 500 index in the following period. The target variable is defined as a binary label, where:
 
- ### Project Overview
-This project is a part of ORIE 5160 - Final Project at Cornell University. It explores a systematic approach to stock performance forecasting using various machine learning techniques, including Logistic Regression, Random Forest, XGBoost, K-Nearest Neighbors (KNN), Support Vector Classifier (SVC), and a Stacking Classifier that combines the strengths of multiple models.
+Stocks achieving active returns above a predefined threshold N are considered outperformers.
 
-### Key features of the project include:
+Active Return Formula:
 
-Feature Engineering: Capturing historical stock performance with lagged active returns over a 12-week period.
-Exploratory Data Analysis (EDA): Understanding the data distribution and identifying patterns for prediction.
-Machine Learning Models: Evaluating models on key metrics such as accuracy, precision, recall, F1-score, and ROC-AUC.
-Simulated Trading Strategy: Translating predictions into portfolio decisions and comparing performance against the S&P 500 benchmark.
-Repository Structure
+a_{ri,t} = r_{i,t} - bm_t
 
+where r_{i,t} represents the return of stock i at time t, and bm_t denotes the benchmark return.
 
-### Repository Structure:
-```yaml
-.
+Thresholded Target:
+
+y_{i,t} =
+  1, if a_{ri,t} > 0.01
+  0, otherwise
+
+## Dataset
+The dataset used in this project spans January 1, 2014 – September 30, 2024, with daily price data for S&P 500 constituent stocks and the S&P 500 index itself. The data was divided into:
+
+Training Set: 60% (2015–2020)
+Validation Set: 20% (2021–2022)
+Test Set: 20% (2023–2024)
+## Key preprocessing steps:
+
+Standardized numeric formats and corrected non-numeric values.
+Calculated lagged features for 12 weeks.
+Addressed missing values and ensured continuity across holidays and non-trading days.
+Computed active returns (difference between individual stock and benchmark returns).
+## Methodology
+The project applies a range of machine learning models for classification:
+
+Logistic Regression: A linear baseline model for simplicity and interpretability.
+K-Nearest Neighbors (KNN): Classifies stocks based on feature similarity.
+Random Forest: An ensemble method to capture non-linear feature interactions.
+Support Vector Classifier (SVC): Uses kernel methods for non-linear decision boundaries.
+XGBoost: An optimized gradient boosting algorithm for handling imbalanced datasets.
+Stacking Classifier: Combines Logistic Regression, Random Forest, and XGBoost to improve predictions through a meta-model.
+## Trading Strategy
+Predictions from the Stacking Classifier are used to simulate a trading strategy:
+1. Portfolio Construction: Allocate capital evenly among stocks predicted to outperform each week.
+2. Performance Metrics:
+   -  Compare portfolio returns against the S&P 500 benchmark.
+   -  Evaluate annualized returns and active returns.
+### Key formula:
+
+Annualized Return:
+
+R_annualized = ((V_end / V_start)^(252 / T)) - 1
+
+where V_start and V_end are portfolio values at the start and end of the period, and T is the number of trading days.
+
+Active Return:
+
+R_active = R_portfolio - R_benchmark
+
+## Repository Structure
+
+```yaml.
 ├── data/
 │   ├── Raw and processed datasets
-│   ├── Example: SP500_eval_predictions_LogisticRegression.csv
-│   ├── Plots:
-│       ├── SP500_plot_eval_XGBoost_port_vs_bm.png
-│       ├── SP500_plot_eval_Stacking_port_vs_bm.png
+│   ├── Plots: SP500_plot_eval_Stacking_port_vs_bm.png
 │
 ├── dslc_documentation/
 │   ├── functions/
-│       ├── constants.py: Script containing project constants
-│       ├── helper_fns.py: Helper functions for data manipulation and utilities
-│   ├── 01_cleaning.ipynb: Notebook for data cleaning and preprocessing
+│       ├── constants.py: Project constants
+│       ├── helper_fns.py: Utility functions
+│   ├── 01_cleaning.ipynb: Data cleaning
 │   ├── 02_eda.ipynb: Exploratory Data Analysis
 │   ├── 03_prediction.ipynb: Main prediction workflow
-│   ├── 03_prediction_SVC.ipynb: Support Vector Classifier model
-│   ├── 03_prediction_logistic_regression.ipynb: Logistic Regression model
-│   ├── 03_prediction_random_forest.ipynb: Random Forest model
-│   ├── 03_prediction_xgboost.ipynb: XGBoost model
-│   ├── 04_trading_strategy.ipynb: Trading strategy simulation
+│   ├── 03_prediction_SVC.ipynb: SVC implementation
+│   ├── 04_trading_strategy.ipynb: Simulated trading strategy
 │
-├── .gitignore: Specifies files and directories ignored by Git
-├── README.md: Main project documentation
-.
+├── README.md: Main documentation
 ```
-
-### Highlights
-#### Datasets:
-
-Data sourced via Bloomberg Terminal, covering S&P 500 constituent prices (2015–2024).
-Preprocessed and cleaned datasets ensure stability and computability.
-#### Machine Learning Models:
-
-Baseline: Logistic Regression.
-Advanced: Random Forest, XGBoost, KNN, and SVC.
-Ensemble: Stacking Classifier combining Logistic Regression, Random Forest, and XGBoost.
-#### Trading Strategy:
-
-A simulated $1M portfolio was allocated based on model predictions.
-Performance evaluation included annualized returns and comparison against the benchmark.
-### Key Findings:
-
-While ML models provide actionable insights, challenges such as imbalanced data and noisy markets persist.
-The ensemble model showed improved accuracy but highlighted the complexity of real-world financial forecasting.
-#### How to Use
-Clone the repository:
-
-git clone https://github.com/aashish-khub/bm_outperformers_project.git
-
-
-Install dependencies:
-
-Python 3.8+ is required.
-Install necessary libraries using:
-Copy code
-pip install -r requirements.txt
-Explore notebooks for:
-
-Data cleaning and feature engineering: 01_cleaning.ipynb
-Model training and testing: 03_prediction_xgboost.ipynb
-Evaluate predictions:
-
-Check plots and CSV outputs in the data/ folder for results.
-### Future Work
-Incorporate alternative data sources such as sentiment analysis or macroeconomic indicators.
-Explore advanced models like LSTMs or Transformers for better temporal prediction.
-Integrate transaction costs and liquidity constraints for more realistic strategy simulations.
-### Contributors
-Aashish Khubchandani, Cornell Tech
-Abhijay Rane, Cornell Tech
+## Future Work
+Explore advanced time-series models like Long Short-Term Memory (LSTM) networks or Transformers.
+Incorporate alternative data sources like sentiment analysis and macroeconomic indicators.
+Address real-world trading constraints, such as transaction costs and liquidity.
+## Contributors
+Aashish Khubchandani (Cornell Tech)
+Abhijay Rane (Cornell Tech)
