@@ -37,19 +37,19 @@ Validation Set: 20% (2021–2022)
 Test Set: 20% (2023–2024)
 ## Key preprocessing steps:
 
-Standardized numeric formats and corrected non-numeric values.
-Calculated lagged features for 12 weeks.
-Addressed missing values and ensured continuity across holidays and non-trading days.
-Computed active returns (difference between individual stock and benchmark returns).
+1. Standardized numeric formats and corrected non-numeric values.
+2. Calculated lagged features for 12 weeks.
+3. Addressed missing values and ensured continuity across holidays and non-trading days.
+4. Computed active returns (difference between individual stock and benchmark returns).
 ## Methodology
 The project applies a range of machine learning models for classification:
 
-Logistic Regression: A linear baseline model for simplicity and interpretability.
-K-Nearest Neighbors (KNN): Classifies stocks based on feature similarity.
-Random Forest: An ensemble method to capture non-linear feature interactions.
-Support Vector Classifier (SVC): Uses kernel methods for non-linear decision boundaries.
-XGBoost: An optimized gradient boosting algorithm for handling imbalanced datasets.
-Stacking Classifier: Combines Logistic Regression, Random Forest, and XGBoost to improve predictions through a meta-model.
+- Logistic Regression: A linear baseline model for simplicity and interpretability.
+- K-Nearest Neighbors (KNN): Classifies stocks based on feature similarity.
+- Random Forest: An ensemble method to capture non-linear feature interactions.
+- Support Vector Classifier (SVC): Uses kernel methods for non-linear decision boundaries.
+- XGBoost: An optimized gradient boosting algorithm for handling imbalanced datasets.
+- Stacking Classifier: Combines Logistic Regression, Random Forest, and XGBoost to improve predictions through a meta-model.
 ## Trading Strategy
 Predictions from the Stacking Classifier are used to simulate a trading strategy:
 1. Portfolio Construction: Allocate capital evenly among stocks predicted to outperform each week.
@@ -87,6 +87,21 @@ R_active = R_portfolio - R_benchmark
 │
 ├── README.md: Main documentation
 ```
+## Results
+### Model Performance
+Each of the machine learning models demonstrated unique strengths and challenges:
+
+- Logistic Regression: This model provided a reliable baseline, but its linear nature limited its ability to capture complex relationships within the data.
+- K-Nearest Neighbors (KNN): It performed adequately but faced challenges with scalability and imbalanced data.
+- Random Forest: This model effectively captured non-linear relationships and interactions between features but required careful hyperparameter tuning to prevent overfitting.
+- Support Vector Classifier (SVC): While this model was strong at handling non-linear data, it suffered from lower precision due to class imbalance.
+- XGBoost: This gradient boosting algorithm excelled at handling imbalanced datasets and delivered robust performance, especially after tuning.
+- Stacking Classifier: By combining Logistic Regression, Random Forest, and XGBoost, this ensemble model demonstrated the most balanced and consistent performance across various metrics, making it the best-performing model overall.
+### Trading Strategy Results
+The predictions from the Stacking Classifier were used to simulate a trading strategy. The strategy involved allocating equal capital to all stocks predicted to outperform the benchmark each week.
+
+- Portfolio Performance: While the simulated portfolio generated notable returns over the test period, it slightly underperformed the S&P 500 benchmark due to market volatility and practical constraints.
+- Insights: The strategy demonstrated the potential of machine learning for portfolio construction but revealed limitations, such as ignoring transaction costs, liquidity constraints, and other real-world factors.
 ## Future Work
 Explore advanced time-series models like Long Short-Term Memory (LSTM) networks or Transformers.
 Incorporate alternative data sources like sentiment analysis and macroeconomic indicators.
