@@ -1,9 +1,23 @@
-#TODO: COPY OVER BIG FUNCTIONS FROM VARIOUS NOTEBOOKS!
 import pandas as pd
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, roc_auc_score, confusion_matrix
 import seaborn as sns
 import matplotlib.pyplot as plt
 from .constants import TEST_START_DATE, EVAL_START_DATE, N_THRESHOLD_BPS, DATA_DIR, BM_NAME
+
+def remove_BBG_suffixes(df):
+    """
+    Remove the suffixes " Equity" from the column names
+    """
+    df.columns = df.columns.str.replace(' Equity', '')
+    # df.columns = df.columns.str.replace(' Index', '') #let's keep the SPX Index in for clarity
+    return df
+
+def melt_data(df):
+    """
+    Melt the dataframe to have a column for the date, a column for the ticker and a column for the price
+    """
+    df = df.melt(id_vars=["Date"], var_name="Ticker", value_name="Price")
+    return df
 
 def featurize_time_series(df, period_chosen, num_trailing_periods, reduce_rows=True, set_threshold_for_target_var_bps=None):
     '''
@@ -137,3 +151,5 @@ def load_active_returns():
     active_returns = pd.read_csv(active_returns_path, index_col=0, parse_dates=True)
     print("Loaded active returns from", active_returns_path)
     return active_returns
+
+    
