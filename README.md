@@ -35,9 +35,7 @@ where $r_{i,t}$ represents the return of stock $i$ at time $t$, and $bm_t$ denot
 
 Thresholded Target:
 
-$$y_{i,t} = \mathbb I (\  a_{ri,t} > 0.01)
-  
-$$
+$$y_{i,t} = \mathbb I (\  a_{ri,t} > 0.01) $$
 ## Dataset
 The dataset used in this project spans January 1, 2014 – September 30, 2024, with daily price data for S&P 500 constituent stocks and the S&P 500 index itself. The data was divided into:
 
