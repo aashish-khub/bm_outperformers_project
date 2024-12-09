@@ -163,3 +163,4 @@ cython_debug/
 .DS_Store
 data/SP500_active*.csv
 data/orig_BBG_linked_excel/*
+data/local_storage/*

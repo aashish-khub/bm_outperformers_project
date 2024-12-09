@@ -4,6 +4,16 @@ This repository contains the implementation of a project aimed at forecasting th
 ## Project Overview
 This project explores how machine learning models can help identify S&P 500 stocks likely to outperform in the short term. Predictions are tested through a simulated trading strategy to evaluate their real-world applicability. It demonstrates how data-driven approaches can support decision-making in financial markets while identifying opportunities for further refinement.
 
+## Running the Code
+
+To reproduce the results of this project, follow these steps:
+
+1. Navigate to the `dslc_documentation/` directory.
+2. Run the Jupyter notebooks in order, starting with `01_cleaning.ipynb` through to `04_cleaning.ipynb`. These notebooks process the raw data and generate the required findings.
+3. The raw data used in these notebooks can be found in the `data/` directory, and any output plots (as well as interim preprocessed data files) are stored here. 
+
+Each notebook builds on the previous one, so it is important to execute them sequentially to ensure the analysis proceeds correctly.
+
 ## Key ML models used:
 
 - Logistic Regression
@@ -19,16 +29,15 @@ Stocks achieving active returns above a predefined threshold N are considered ou
 
 Active Return Formula:
 
-a_{ri,t} = r_{i,t} - bm_t
+$$ar_{i,t} = r_{i,t} - bm_t$$
 
-where r_{i,t} represents the return of stock i at time t, and bm_t denotes the benchmark return.
+where $r_{i,t}$ represents the return of stock $i$ at time $t$, and $bm_t$ denotes the benchmark return.
 
 Thresholded Target:
 
-y_{i,t} =
-  1, if a_{ri,t} > 0.01
-  0, otherwise
-
+$$y_{i,t} = \mathbb I (\  a_{ri,t} > 0.01)
+  
+$$
 ## Dataset
 The dataset used in this project spans January 1, 2014 – September 30, 2024, with daily price data for S&P 500 constituent stocks and the S&P 500 index itself. The data was divided into:
 
@@ -60,24 +69,28 @@ Predictions from the Stacking Classifier are used to simulate a trading strategy
 
 Annualized Return:
 
-R_annualized = ((V_end / V_start)^(252 / T)) - 1
+$$
+R_{annualized} = \bigg(\frac{V_{end}}{V_{start}} \bigg) ^{\frac{252}T} - 1
+$$
+where $V_{start}$ and $V_{end}$ are portfolio values at the start and end of the period, and $T$ is the number of trading days over the period. 
 
-where V_start and V_end are portfolio values at the start and end of the period, and T is the number of trading days.
+Annualized Active Return:
 
-Active Return:
+$$
+R_{ann,\ 
+active} = R_{ann,\ portfolio} - R_{ann,\ 
+benchmark}
 
-R_active = R_portfolio - R_benchmark
-
+$$
 ## Repository Structure
 
 ```yaml.
 ├── data/
-│   ├── Raw and processed datasets
-│   ├── Plots: SP500_plot_eval_Stacking_port_vs_bm.png
+│   ├── Raw Data 
 │
 ├── dslc_documentation/
 │   ├── functions/
-│       ├── constants.py: Project constants
+│       ├── constants.py: Constants used across files
 │       ├── helper_fns.py: Utility functions
 │   ├── 01_cleaning.ipynb: Data cleaning
 │   ├── 02_eda.ipynb: Exploratory Data Analysis
@@ -103,9 +116,11 @@ The predictions from the Stacking Classifier were used to simulate a trading str
 - Portfolio Performance: While the simulated portfolio generated notable returns over the test period, it slightly underperformed the S&P 500 benchmark due to market volatility and practical constraints.
 - Insights: The strategy demonstrated the potential of machine learning for portfolio construction but revealed limitations, such as ignoring transaction costs, liquidity constraints, and other real-world factors.
 ## Future Work
-Explore advanced time-series models like Long Short-Term Memory (LSTM) networks or Transformers.
-Incorporate alternative data sources like sentiment analysis and macroeconomic indicators.
-Address real-world trading constraints, such as transaction costs and liquidity.
+Future work could:
+- Explore advanced time-series models like Long Short-Term Memory (LSTM) networks or Transformers.
+- Incorporate alternative data sources like sentiment analysis and macroeconomic indicators.
+Address real-world trading constraints, such as transaction costs and liquidity. 
+- Learn optimal portfolio alllocation enhancements rather than just selecting stocks expected out outperform. 
 ## Contributors
 - Aashish Khubchandani (Cornell Tech)
 - Abhijay Rane (Cornell Tech)
